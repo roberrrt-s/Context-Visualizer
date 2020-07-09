@@ -30,7 +30,7 @@ class App {
 			.nodes(data.nodes);
 
 		var x = d3.scaleLinear()
-		    .domain([0, 10])
+		    .domain([0, 1])
 		    .range([25, 250]);
 
 		var link_force =  d3.forceLink(data.links)
@@ -38,8 +38,9 @@ class App {
 				return d.id_str;
 			})
 			.distance(function(d) {
-				console.log(d.source.sentiment)
-				return x(d.source.amount_of_replies);
+				let sqrt = d.source.sentiment.comparative * d.source.sentiment.comparative;
+				console.log(x(sqrt / 2));
+				return x(sqrt / 2);
 			});
 
 		var charge_force = d3.forceManyBody()
@@ -86,8 +87,6 @@ class App {
 			});
 
 		node.on("click", d => {
-			console.log(d)
-			console.log(document.querySelector("#meta"));
 			document.querySelector("#meta pre code").textContent = JSON.stringify(d, undefined, 2);
 		})
 
