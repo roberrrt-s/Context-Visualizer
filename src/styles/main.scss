@@ -72,9 +72,10 @@ pre {
 .links line {
 	stroke: #999;
 	stroke-opacity: 0.6;
+	cursor: pointer;
 }
 
 .nodes circle {
-	stroke: black	;
+	stroke: black;
 	stroke-width: 0px;
 }
