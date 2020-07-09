@@ -38,7 +38,8 @@ class App {
 				return d.id_str;
 			})
 			.distance(function(d) {
-				return x(d.source.amount_of_replies);
+				let source = x(d.source.amount_of_replies);
+				return getRandomInt((source * 0.75), (source * 1.25));
 			});
 
 		var charge_force = d3.forceManyBody()
@@ -176,6 +177,12 @@ class App {
 			simulation.force("center", d3.forceCenter(width / 2, height / 2))
 
 			simulation.alpha(0.3).restart();
+		}
+
+		function getRandomInt(min, max) {
+			min = Math.ceil(min);
+			max = Math.floor(max);
+			return Math.floor(Math.random() * (max - min + 1)) + min;
 		}
 	}
 }
