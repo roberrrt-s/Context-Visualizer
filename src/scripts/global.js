@@ -38,6 +38,7 @@ class App {
 				return d.id_str;
 			})
 			.distance(function(d) {
+				console.log(d.source.sentiment)
 				return x(d.source.amount_of_replies);
 			});
 
