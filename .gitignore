@@ -1,0 +1,9 @@
+# Folders
+node_modules
+
+# Files
+package-lock.json
+*.sublime-workspace
+*.sublime-project
+.env
+.DS_Store
