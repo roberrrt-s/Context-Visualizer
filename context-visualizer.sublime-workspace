@@ -1,0 +1,306 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"id",
+				"in_reply_to_status_id"
+			]
+		]
+	},
+	"buffers":
+	[
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"monokai",
+				"Monokai Pro: select theme"
+			],
+			[
+				"install",
+				"Package Control: Install Package"
+			],
+			[
+				"remove ",
+				"Package Control: Remove Package"
+			],
+			[
+				"install packa",
+				"Package Control: Install Package"
+			],
+			[
+				"remove",
+				"Package Control: Remove Package"
+			],
+			[
+				"select the",
+				"Monokai Pro: select theme"
+			],
+			[
+				"remove pack",
+				"Package Control: Remove Package"
+			],
+			[
+				"install ",
+				"Package Control: Install Package"
+			],
+			[
+				"color scheme",
+				"UI: Select Color Scheme"
+			],
+			[
+				"remove packa",
+				"Package Control: Remove Package"
+			],
+			[
+				"package",
+				"Package Control: Remove Package"
+			],
+			[
+				"mono",
+				"Monokai Pro: select theme"
+			],
+			[
+				"monoka",
+				"Monokai Pro: select theme"
+			],
+			[
+				"monok",
+				"Monokai Pro: select theme"
+			],
+			[
+				"install pack",
+				"Package Control: Install Package"
+			]
+		],
+		"width": 0.0
+	},
+	"console":
+	{
+		"height": 267.0,
+		"history":
+		[
+			"sudo",
+			"install",
+			"reload"
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"expanded_folders":
+	[
+		"/Users/Robert/Sites/Context-Visualizer",
+		"/Users/Robert/Sites/Context-Visualizer/build",
+		"/Users/Robert/Sites/Context-Visualizer/dist",
+		"/Users/Robert/Sites/Context-Visualizer/src",
+		"/Users/Robert/Sites/Context-Visualizer/src/images",
+		"/Users/Robert/Sites/Context-Visualizer/src/scripts",
+		"/Users/Robert/Sites/Context-Visualizer/src/styles"
+	],
+	"file_history":
+	[
+		"/Users/Robert/Sites/Context-Visualizer/src/styles/main.scss",
+		"/Users/Robert/Sites/Context-Visualizer/src/index.html",
+		"/Users/Robert/Sites/Context-Visualizer/src/scripts/data.json",
+		"/Users/Robert/Sites/Context-Visualizer/src/scripts/global.js",
+		"/Users/Robert/Sites/StopStealingVideos/watermark.js",
+		"/Users/Robert/Sites/Context-Visualizer/package.json",
+		"/Users/Robert/Sites/Context-Visualizer/dist/index.html",
+		"/Users/Robert/Sites/twitter-replies-parser-master/server/index.js",
+		"/Users/Robert/Sites/Twitter-Scraper/output/convert.js",
+		"/Users/Robert/Sites/Twitter-Scraper/data.js",
+		"/Users/Robert/Sites/Twitter-Scraper/index.js",
+		"/Users/Robert/Sites/twitter-replies-parser-master/.env",
+		"/Users/Robert/Sites/WoningnetBot/App.js",
+		"/Users/Robert/Sites/WoningnetBot/hva-sollicitatie.txt",
+		"/Users/Robert/Sites/WoningnetBot/.gitattributes",
+		"/Users/Robert/Sites/WoningnetBot/package.json",
+		"/Users/Robert/Sites/ZealousBot/Procfile",
+		"/Users/Robert/Sites/ReaktorEvents/site/web/app/themes/reaktorevents/resources/assets/styles/common/_variables.scss",
+		"/Users/Robert/Sites/ReaktorEvents/site/web/app/themes/reaktorevents/resources/views/blocks/b-faq.blade.php",
+		"/Users/Robert/Sites/ReaktorEvents/site/web/app/themes/reaktorevents/resources/assets/styles/blocks/_b-line-up.scss",
+		"/Users/Robert/Sites/ReaktorEvents/site/web/app/themes/reaktorevents/resources/assets/styles/blocks/_b-faq.scss",
+		"/Users/Robert/Sites/ReaktorEvents/site/web/app/themes/reaktorevents/resources/assets/styles/common/_global.scss",
+		"/Users/Robert/Sites/ReaktorEvents/site/web/app/themes/reaktorevents/resources/assets/styles/components/_c-button.scss",
+		"/Users/Robert/Sites/ReaktorEvents/site/web/app/themes/reaktorevents/app/Controllers/TemplateFaq.php",
+		"/Users/Robert/Sites/ReaktorEvents/site/web/app/themes/reaktorevents/resources/views/template-faq.blade.php",
+		"/Users/Robert/Sites/ReaktorEvents/site/web/app/themes/reaktorevents/resources/assets/styles/main.scss",
+		"/Users/Robert/Sites/ReaktorEvents/site/composer.json",
+		"/Users/Robert/Sites/ReaktorEvents/site/web/app/themes/reaktorevents/composer.json",
+		"/Users/Robert/Sites/ReaktorEvents/trellis/group_vars/development/wordpress_sites.yml",
+		"/Users/Robert/Desktop/food-waste.txt",
+		"/Users/Robert/Desktop/test.bib",
+		"/Users/Robert/Sites/ReaktorEvents/site/web/app/themes/reaktorevents/resources/views/blocks/b-media.blade.php",
+		"/Users/Robert/Sites/ReaktorEvents/site/web/app/themes/reaktorevents/resources/assets/styles/blocks/_b-landing-media.scss",
+		"/Users/Robert/Sites/ReaktorEvents/site/web/app/themes/reaktorevents/resources/assets/styles/common/_fonts.scss",
+		"/Users/Robert/Sites/ReaktorEvents/site/web/app/themes/reaktorevents/resources/assets/styles/blocks/_b-landing-hero.scss",
+		"/Users/Robert/Sites/ReaktorEvents/site/web/app/themes/reaktorevents/resources/assets/styles/blocks/_b-cta-buttons.scss",
+		"/Users/Robert/Sites/ReaktorEvents/site/web/app/themes/reaktorevents/resources/views/front-page.blade.php",
+		"/Users/Robert/Sites/ReaktorEvents/site/web/app/themes/reaktorevents/resources/assets/styles/layouts/_l-wrap.scss",
+		"/Users/Robert/Sites/ReaktorEvents/site/web/app/themes/reaktorevents/resources/views/blocks/b-event-intro.blade.php",
+		"/Users/Robert/Sites/ReaktorEvents/site/web/app/themes/reaktorevents/resources/assets/styles/layouts/_l-main.scss",
+		"/Users/Robert/Sites/ReaktorEvents/site/web/app/themes/reaktorevents/resources/assets/styles/blocks/_b-event-intro.scss",
+		"/Users/Robert/Sites/ReaktorEvents/site/web/app/themes/reaktorevents/resources/assets/scripts/main.js",
+		"/Users/Robert/Sites/ReaktorEvents/site/web/app/themes/reaktorevents/resources/views/blocks/b-line-up.blade.php",
+		"/Users/Robert/Desktop/references.bib",
+		"/Users/Robert/Sites/ReaktorEvents/site/web/app/themes/reaktorevents/resources/assets/styles/common/backup-fonts.scss",
+		"/Users/Robert/Sites/ReaktorEvents/site/web/app/themes/reaktorevents/package.json",
+		"/Users/Robert/Library/Application Support/Sublime Text 3/Packages/Color Highlighter/ColorHighlighter.sublime-settings",
+		"/Users/Robert/Library/Application Support/Sublime Text 3/Packages/User/ColorHighlighter.sublime-settings",
+		"/Users/Robert/Sites/ReaktorEvents/site/web/app/themes/reaktorevents/app/setup.php",
+		"/Users/Robert/Sites/ReaktorEvents/site/wp-cli.yml",
+		"/Users/Robert/Sites/ReaktorEvents/site/.env",
+		"/Users/Robert/Library/Application Support/Sublime Text 3/Packages/User/Theme - Monokai Pro.sublime-settings"
+	],
+	"find":
+	{
+		"height": 23.0
+	},
+	"find_in_files":
+	{
+		"height": 132.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"amount_of_replies\":1",
+			"start",
+			"full_text",
+			"text\":",
+			"text:",
+			"console.log",
+			"sex",
+			"nodes_data",
+			"linkColour",
+			"1269909634338427000",
+			"links_",
+			"nodes_",
+			"  "
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"sheets":
+			[
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 23.0
+	},
+	"input":
+	{
+		"height": 48.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"pinned_build_system": "",
+	"project": "context-visualizer.sublime-project",
+	"replace":
+	{
+		"height": 42.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 307.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}
