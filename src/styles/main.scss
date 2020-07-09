@@ -31,6 +31,7 @@ body {
 	width: 100%;
 	height: 100vmin;
 	overflow: auto;
+	padding: 1rem;
 
 	@media only screen and (orientation:portrait) {
 		width: 100vmin;
@@ -38,12 +39,29 @@ body {
 	}
 }
 
+#subject {
+	position: fixed;
+	top: .5rem;
+	left: .5rem;
+	width: auto;
+	padding: .5rem;
+	background: $m-blue;
+	margin: 0 !important;
+	display: flex;
+}
+
+code, pre {
+	margin: 0;
+	padding: 0;
+	text-indent: 0;
+}
+
 pre {
-    white-space: pre-wrap;       /* Since CSS 2.1 */
-    white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
-    white-space: -pre-wrap;      /* Opera 4-6 */
-    white-space: -o-pre-wrap;    /* Opera 7 */
-    word-wrap: break-word;       /* Internet Explorer 5.5+ */
+	white-space: pre-wrap;       /* Since CSS 2.1 */
+	white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
+	white-space: -pre-wrap;      /* Opera 4-6 */
+	white-space: -o-pre-wrap;    /* Opera 7 */
+	word-wrap: break-word;       /* Internet Explorer 5.5+ */
 }
 
 .node text {
