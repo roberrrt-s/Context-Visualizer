@@ -52,7 +52,7 @@ module.exports = {
 	target: 'web',
 	output: {
 		path         : Path.join(ROOT, 'dist'),
-		publicPath   : PRODUCTION ? '/super-rainbow-polyblob/' : '/',
+		publicPath   : '.',
 		filename     : `scripts/${HASH_BUNDLE}.js`,
 		library      : '[name]',
 		libraryTarget: 'umd'
