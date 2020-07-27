@@ -86,8 +86,47 @@ class App {
 			  return d.user.name;
 			});
 
+		function generateTweet(container, tweet, type) {
+			console.log(tweet)
+
+			// d.full_text
+			// d.user.name
+			// d.user.screen_name
+
+			let div = document.createElement('div');
+			div.classList.add("tweet", type)
+
+			let name = document.createElement('span')
+			name.append(`@${tweet.user.screen_name} (${tweet.user.name})`)
+
+			let content = document.createElement('p');
+			content.append(tweet.full_text)
+
+			div.append(name);
+			div.append(content)
+			container.append(div);
+		}
+
 		node.on("click", d => {
-			document.querySelector("#meta pre code").textContent = JSON.stringify(d, undefined, 2);
+			let element = document.querySelector("#meta")
+			element.innerHTML = "";
+
+			// parent nodes
+			data.nodes.map((el, i) => {
+				if(el.id_str === d.in_reply_to_status_id_str) {
+					generateTweet(element, el, "parent")
+				}
+			});
+
+			generateTweet(element, d, "element")
+
+			// child nodes
+			data.nodes.map((el, i) => {
+				if(d.id_str === el.in_reply_to_status_id_str) {
+					generateTweet(element, el, "child")
+				}
+			});
+
 		})
 
 		//add drag capabilities

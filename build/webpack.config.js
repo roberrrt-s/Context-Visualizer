@@ -52,7 +52,7 @@ module.exports = {
 	target: 'web',
 	output: {
 		path         : Path.join(ROOT, 'dist'),
-		publicPath   : '.',
+		publicPath   : PRODUCTION ? '.' : '/',
 		filename     : `scripts/${HASH_BUNDLE}.js`,
 		library      : '[name]',
 		libraryTarget: 'umd'
