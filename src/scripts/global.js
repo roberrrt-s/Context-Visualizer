@@ -11,7 +11,6 @@ const APP = {
 class App {
 
 	constructor() {
-
 		//create somewhere to put the force directed graph
 
 		let width = window.innerWidth;
@@ -40,11 +39,11 @@ class App {
 				return d.id_str;
 			})
 			.distance(function(d) {
-				return 25;
+				return 45;
 			});
 
 		var charge_force = d3.forceManyBody()
-			.strength(-15);
+			.strength(-35);
 
 		var center_force = d3.forceCenter(width / 2, height / 2);
 
@@ -55,6 +54,14 @@ class App {
 
 		//add tick instructions:
 		simulation.on("tick", tickActions);
+
+		var positiveColor = d3.scaleLinear().domain([0, 10])
+			.interpolate(d3.interpolateHcl)
+			.range([d3.rgb("#cccccc"), d3.rgb('#a9dc76')]);
+
+		var negativeColor = d3.scaleLinear().domain([-10, 0])
+			.interpolate(d3.interpolateHcl)
+			.range([d3.rgb("#fc9867"), d3.rgb('#cccccc')]);
 
 		//add encompassing group for the zoom
 		var g = svg.append("g")
@@ -69,57 +76,82 @@ class App {
 			.attr("stroke-width", 2);
 			//.style("stroke", "#F00");
 
-		var positiveColor = d3.scaleLinear().domain([0, 10])
-			.interpolate(d3.interpolateHcl)
-			.range([d3.rgb("#cccccc"), d3.rgb('#a9dc76')]);
-
-		var negativeColor = d3.scaleLinear().domain([-10, 0])
-			.interpolate(d3.interpolateHcl)
-			.range([d3.rgb("#fc9867"), d3.rgb('#cccccc')]);
-
-
 		//draw circles for the nodes
 		var node = g.append("g")
 			.attr("class", "nodes")
-			.selectAll("circle")
+			.selectAll("g")
 			.data(data.nodes)
 			.enter()
 			.append("g")
-			.attr("class", "single-node")
-			.append("circle")
-			.attr("stroke", "black")
-			.attr("stroke-width", function(d) {
+			.attr("class", function(d) {
 				if(!d.in_reply_to_status_id_str) {
-					return 1
+					return "core single-node"
 				} else {
-					return 0
-				}
-			})
-			.attr("r", function(d) {
-				console.log(d)
-				return radius(d.amount_of_replies + d.favorite_count)
-			})
-			.attr("fill", function(d) {
-				if(d.sentiment.score > 0) {
-					return positiveColor(d.sentiment.score);
-				} else {
-					return negativeColor(d.sentiment.score);
+					return "single-node"
 				}
 			})
 
-		var lables = node.enter().append("text")
-			.text(function(d) {
-				return d.id_str;
-			})
-			.attr('x', 6)
-			.attr('y', 3);
+		var text = node
+			.append("text");
+
+			text
+				.append("tspan")
+				.text(function(d) {
+					if(d.topics.length) {
+						if(d.topics[0].term) {
+							console.log('true')
+							return d.topics[0].term
+						} else {
+							console.log('false')
+							return `${d.topics[0][0].term}`
+						}
+					} else {
+						return "";
+					}
+				})
+				.attr("x", 0)
+				.attr("dy", -5)
+				.attr("text-anchor", "middle")
+
+			text
+				.append("tspan")
+				.text(function(d) {
+					if(d.topics.length) {
+						if(d.topics[0].term) {
+							console.log('true')
+							return d.topics[1].term
+						} else {
+							console.log('false')
+							return `${d.topics[1][0].term}`
+						}
+					} else {
+						return "no topics found";
+					}
+				})
+				.attr("x", 0)
+				.attr("dy", function(d) {
+					if(d.topics.length) {
+						return 10
+					} else {
+						return 0;
+					}
+				})
+				.attr("text-anchor", "middle")
+
+			node
+				.append("circle")
+				.attr("r", function(d) {
+					return radius(d.amount_of_replies + d.favorite_count)
+				})
+				.attr("fill", function(d) {
+					if(d.sentiment.score > 0) {
+						return positiveColor(d.sentiment.score);
+					} else {
+						return negativeColor(d.sentiment.score);
+					}
+				})
 
 		function generateTweet(container, tweet, type) {
-
-			// d.full_text
-			// d.user.name
-			// d.user.screen_name
-
 			let div = document.createElement('div');
 			div.classList.add("tweet", type)
 
@@ -176,21 +208,25 @@ class App {
 		//Drag functions
 		//d is the node
 		function drag_start(d) {
-		 if (!d3.event.active) simulation.alphaTarget(0.3).restart();
-			d.fx = d.x;
-			d.fy = d.y;
+			if (!d3.event.active) {
+				simulation.alphaTarget(0.3).restart();
+				d.fx = d.x;
+				d.fy = d.y;
+			}
 		}
 
 		//make sure you can't drag the circle outside the box
 		function drag_drag(d) {
-		  d.fx = d3.event.x;
-		  d.fy = d3.event.y;
+			d.fx = d3.event.x;
+			d.fy = d3.event.y;
 		}
 
 		function drag_end(d) {
-		  if (!d3.event.active) simulation.alphaTarget(0);
-		  d.fx = null;
-		  d.fy = null;
+			if (!d3.event.active) {
+				simulation.alphaTarget(0);
+				d.fx = null;
+				d.fy = null;
+			}
 		}
 
 		//Zoom functions
@@ -201,8 +237,11 @@ class App {
 		function tickActions() {
 			//update circle positions each tick of the simulation
 			node
-				.attr("cx", function(d) { return d.x; })
-				.attr("cy", function(d) { return d.y; });
+				.attr("transform", function(d) {
+					return `translate(${d.x},${d.y})`;
+				});
+			//	.attr("x", function(d) { return d.x; })
+			//	.attr("y", function(d) { return d.y; });
 
 			//update link positions
 			link

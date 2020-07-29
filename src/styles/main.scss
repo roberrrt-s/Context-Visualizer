@@ -98,9 +98,22 @@ pre {
 	margin-left: 2rem;
 }
 
-.node text {
-	pointer-events: none;
+.nodes text {
 	font: 10px sans-serif;
+	text-anchor: middle;
+	alignment-baseline: central;
+
+	tspan {
+		text-anchor: middle;
+		alignment-baseline: central;
+	}
+
+	tspan:not(:only-child) {
+		//dx: .5em;
+	}
+	tspan + tspan {
+		dy: -7.5;
+	}
 }
 
 .links line {
@@ -108,8 +121,20 @@ pre {
 	stroke-opacity: 0.6;
 }
 
-.nodes circle {
+.nodes {
 	cursor: pointer;
+}
+
+.core {
+	circle {
+		stroke-width: 1;
+	}
+	tspan {
+		font-weight: 700;
+	}
+}
+
+.nodes circle {
 	stroke: black;
-	// stroke-width: 0px;
+	stroke-width: 0;
 }
