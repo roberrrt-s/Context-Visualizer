@@ -19,9 +19,11 @@ class App {
 
 		width < height ? height = width : width = height;
 
-
 		const svg = d3.select("svg")
-		const radius = 10;
+
+		var radius = d3.scaleLinear()
+			.domain([0, 50])
+			.range([7, 20]);
 
       	window.addEventListener("resize", redraw);
 
@@ -30,21 +32,19 @@ class App {
 			.nodes(data.nodes);
 
 		var x = d3.scaleLinear()
-		    .domain([0, 1])
-		    .range([25, 250]);
+		    .domain([0, .5])
+		    .range([50, 500]);
 
 		var link_force =  d3.forceLink(data.links)
 			.id(function(d) {
 				return d.id_str;
 			})
 			.distance(function(d) {
-				let sqrt = d.source.sentiment.comparative * d.source.sentiment.comparative;
-				console.log(x(sqrt / 2));
-				return x(sqrt / 2);
+				return 25;
 			});
 
 		var charge_force = d3.forceManyBody()
-			.strength(-5);
+			.strength(-15);
 
 		var center_force = d3.forceCenter(width / 2, height / 2);
 
@@ -69,25 +69,52 @@ class App {
 			.attr("stroke-width", 2);
 			//.style("stroke", "#F00");
 
+		var positiveColor = d3.scaleLinear().domain([0, 10])
+			.interpolate(d3.interpolateHcl)
+			.range([d3.rgb("#cccccc"), d3.rgb('#a9dc76')]);
+
+		var negativeColor = d3.scaleLinear().domain([-10, 0])
+			.interpolate(d3.interpolateHcl)
+			.range([d3.rgb("#fc9867"), d3.rgb('#cccccc')]);
+
+
 		//draw circles for the nodes
 		var node = g.append("g")
 			.attr("class", "nodes")
 			.selectAll("circle")
 			.data(data.nodes)
 			.enter()
+			.append("g")
+			.attr("class", "single-node")
 			.append("circle")
-			.attr("r", radius)
-			.attr("fill", "#000");
+			.attr("stroke", "black")
+			.attr("stroke-width", function(d) {
+				if(!d.in_reply_to_status_id_str) {
+					return 1
+				} else {
+					return 0
+				}
+			})
+			.attr("r", function(d) {
+				console.log(d)
+				return radius(d.amount_of_replies + d.favorite_count)
+			})
+			.attr("fill", function(d) {
+				if(d.sentiment.score > 0) {
+					return positiveColor(d.sentiment.score);
+				} else {
+					return negativeColor(d.sentiment.score);
+				}
+			})
 
-		node.append("text")
-			.attr("dx", 12)
-			.attr("dy", ".35em")
+		var lables = node.enter().append("text")
 			.text(function(d) {
-			  return d.user.name;
-			});
+				return d.id_str;
+			})
+			.attr('x', 6)
+			.attr('y', 3);
 
 		function generateTweet(container, tweet, type) {
-			console.log(tweet)
 
 			// d.full_text
 			// d.user.name
@@ -108,6 +135,8 @@ class App {
 		}
 
 		node.on("click", d => {
+			console.log(d)
+
 			let element = document.querySelector("#meta")
 			element.innerHTML = "";
 
@@ -143,29 +172,6 @@ class App {
 			.on("zoom", zoom_actions);
 
 		zoom_handler(svg);
-
-		/** Functions **/
-
-		//Function to choose what color circle we have
-		//Let's return blue for males and red for females
-		function circleColour(d){
-			if(d.sex =="M"){
-				return "blue";
-			} else {
-				return "pink";
-			}
-		}
-
-		//Function to choose the line colour and thickness
-		//If the link type is "A" return green
-		//If the link type is "E" return red
-		function linkColour(d){
-			if(d.type == "A"){
-				return "green";
-			} else {
-				return "black";
-			}
-		}
 
 		//Drag functions
 		//d is the node

@@ -21,7 +21,7 @@ body {
 #main {
 	min-width: 100vmin;
 	min-height: 100vmin;
-	background: lavender;
+	//background: lavender;
 
 	@media only screen and (orientation:portrait) {
 		background: pink;
@@ -90,6 +90,10 @@ pre {
 	margin-left: 1rem;
 }
 
+.element {
+	background: #eee;
+}
+
 .element ~ .child {
 	margin-left: 2rem;
 }
@@ -107,5 +111,5 @@ pre {
 .nodes circle {
 	cursor: pointer;
 	stroke: black;
-	stroke-width: 0px;
+	// stroke-width: 0px;
 }
