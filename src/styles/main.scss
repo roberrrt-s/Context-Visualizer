@@ -18,9 +18,32 @@ body {
 	font-family: sans-serif;
 }
 
+#menu {
+	position: absolute;
+	top: 1rem;
+	left: 1rem;
+
+	button {
+		margin-right: .5rem;
+	}
+}
+
+body:not(.circles) .nodes circle {
+	display: none;
+}
+
+body:not(.text) .nodes text {
+	display: none;
+}
+
+body:not(.images) .nodes image {
+	display: none;
+}
+
 #main {
 	min-width: 100vmin;
 	min-height: 100vmin;
+	border-right: 1px solid black;
 	//background: lavender;
 
 	@media only screen and (orientation:portrait) {
@@ -125,12 +148,15 @@ pre {
 	cursor: pointer;
 }
 
-.core {
-	circle {
+.nodes .core {
+	circle, {
 		stroke-width: 1;
 	}
 	tspan {
 		font-weight: 700;
+	}
+	image {
+		outline: 1px solid black;
 	}
 }
 

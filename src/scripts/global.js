@@ -24,6 +24,12 @@ class App {
 			.domain([0, 50])
 			.range([7, 20]);
 
+		function getRandomInt(min, max) {
+			min = Math.ceil(min);
+			max = Math.floor(max);
+			return Math.floor(Math.random() * (max - min + 1)) + min;
+		}
+
       	window.addEventListener("resize", redraw);
 
 		//set up the simulation and add forces
@@ -39,7 +45,7 @@ class App {
 				return d.id_str;
 			})
 			.distance(function(d) {
-				return 45;
+				return getRandomInt(30, 50);
 			});
 
 		var charge_force = d3.forceManyBody()
@@ -84,6 +90,8 @@ class App {
 			.enter()
 			.append("g")
 			.attr("class", function(d) {
+				console.log(d);
+
 				if(!d.in_reply_to_status_id_str) {
 					return "core single-node"
 				} else {
@@ -91,65 +99,80 @@ class App {
 				}
 			})
 
+		var images = node.append("svg:image")
+			.attr("xlink:href",  function(d) {
+				return d.user.profile_image_url_https;
+			})
+			.attr("x", function(d) {
+				return Number(`-${radius(d.amount_of_replies + d.favorite_count)}`)
+			})
+			.attr("y", function(d) {
+				return Number(`-${radius(d.amount_of_replies + d.favorite_count)}`)
+			})
+			.attr("height", function(d) {
+				return `${radius(d.amount_of_replies + d.favorite_count) * 2}px`
+			})
+			.attr("width", function(d) {
+				return `${radius(d.amount_of_replies + d.favorite_count) * 2}px`
+			})
+
 		var text = node
 			.append("text");
 
-			text
-				.append("tspan")
-				.text(function(d) {
-					if(d.topics.length) {
-						if(d.topics[0].term) {
-							console.log('true')
-							return d.topics[0].term
-						} else {
-							console.log('false')
-							return `${d.topics[0][0].term}`
-						}
+		text
+			.append("tspan")
+			.text(function(d) {
+				if(d.topics.length) {
+					if(d.topics[0].term) {
+						return d.topics[0].term
 					} else {
-						return "";
+						return `${d.topics[0][0].term}`
 					}
-				})
-				.attr("x", 0)
-				.attr("dy", -5)
-				.attr("text-anchor", "middle")
+				} else {
+					return "";
+				}
+			})
+			.attr("x", 0)
+			.attr("dy", -5)
+			.attr("text-anchor", "middle")
 
-			text
-				.append("tspan")
-				.text(function(d) {
-					if(d.topics.length) {
-						if(d.topics[0].term) {
-							console.log('true')
-							return d.topics[1].term
-						} else {
-							console.log('false')
-							return `${d.topics[1][0].term}`
-						}
+		text
+			.append("tspan")
+			.text(function(d) {
+				if(d.topics.length) {
+					if(d.topics[0].term) {
+						console.log('true')
+						return d.topics[1].term
 					} else {
-						return "no topics found";
+						console.log('false')
+						return `${d.topics[1][0].term}`
 					}
-				})
-				.attr("x", 0)
-				.attr("dy", function(d) {
-					if(d.topics.length) {
-						return 10
-					} else {
-						return 0;
-					}
-				})
-				.attr("text-anchor", "middle")
+				} else {
+					return "no topics found";
+				}
+			})
+			.attr("x", 0)
+			.attr("dy", function(d) {
+				if(d.topics.length) {
+					return 10
+				} else {
+					return 0;
+				}
+			})
+			.attr("text-anchor", "middle")
 
-			node
-				.append("circle")
-				.attr("r", function(d) {
-					return radius(d.amount_of_replies + d.favorite_count)
-				})
-				.attr("fill", function(d) {
-					if(d.sentiment.score > 0) {
-						return positiveColor(d.sentiment.score);
-					} else {
-						return negativeColor(d.sentiment.score);
-					}
-				})
+		node
+			.append("circle")
+			.attr("r", function(d) {
+				return radius(d.amount_of_replies + d.favorite_count)
+			})
+			.attr("fill", function(d) {
+				if(d.sentiment.score > 0) {
+					return positiveColor(d.sentiment.score);
+				} else {
+					return negativeColor(d.sentiment.score);
+				}
+			})
 
 		function generateTweet(container, tweet, type) {
 			let div = document.createElement('div');
@@ -167,8 +190,6 @@ class App {
 		}
 
 		node.on("click", d => {
-			console.log(d)
-
 			let element = document.querySelector("#meta")
 			element.innerHTML = "";
 
@@ -188,6 +209,26 @@ class App {
 				}
 			});
 
+		})
+
+		var body = document.querySelector("body");
+
+		document.querySelector("#circles").addEventListener("click", function(e) {
+			body.classList.remove("text")
+			body.classList.remove("images")
+			body.classList.add("circles")
+		})
+
+		document.querySelector("#text").addEventListener("click", function(e) {
+			body.classList.remove("circles")
+			body.classList.remove("images")
+			body.classList.add("text")
+		})
+
+		document.querySelector("#images").addEventListener("click", function(e) {
+			body.classList.remove("circles")
+			body.classList.remove("text")
+			body.classList.add("images")
 		})
 
 		//add drag capabilities
