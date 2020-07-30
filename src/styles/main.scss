@@ -44,6 +44,7 @@ body:not(.images) .nodes image {
 	min-width: 100vmin;
 	min-height: 100vmin;
 	border-right: 1px solid black;
+	cursor: all-scroll;
 	//background: lavender;
 
 	@media only screen and (orientation:portrait) {
@@ -142,6 +143,19 @@ pre {
 .links line {
 	stroke: #999;
 	stroke-opacity: 0.6;
+}
+
+.single-node.is-active {
+	circle, {
+		stroke-width: 1;
+		stroke: $m-blue;
+	}
+	tspan {
+		font-style: italic;
+	}
+	image {
+		outline: 1px solid $m-blue;
+	}
 }
 
 .nodes {

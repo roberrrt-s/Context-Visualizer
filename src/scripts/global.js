@@ -13,6 +13,14 @@ class App {
 	constructor() {
 		//create somewhere to put the force directed graph
 
+		function maxLikes(o) {
+			return o.favorite_count;
+		}
+
+		function maxReplies(o) {
+			return o.amount_of_replies
+		}
+
 		let width = window.innerWidth;
 		let	height = window.innerHeight;
 
@@ -21,7 +29,7 @@ class App {
 		const svg = d3.select("svg")
 
 		var radius = d3.scaleLinear()
-			.domain([0, 50])
+			.domain([d3.min(data.nodes, maxLikes), d3.max(data.nodes, maxLikes)])
 			.range([7, 20]);
 
 		function getRandomInt(min, max) {
@@ -45,11 +53,11 @@ class App {
 				return d.id_str;
 			})
 			.distance(function(d) {
-				return getRandomInt(30, 50);
+				return getRandomInt(20, 40);
 			});
 
 		var charge_force = d3.forceManyBody()
-			.strength(-35);
+			.strength(-30);
 
 		var center_force = d3.forceCenter(width / 2, height / 2);
 
@@ -90,8 +98,6 @@ class App {
 			.enter()
 			.append("g")
 			.attr("class", function(d) {
-				console.log(d);
-
 				if(!d.in_reply_to_status_id_str) {
 					return "core single-node"
 				} else {
@@ -104,16 +110,16 @@ class App {
 				return d.user.profile_image_url_https;
 			})
 			.attr("x", function(d) {
-				return Number(`-${radius(d.amount_of_replies + d.favorite_count)}`)
+				return Number(`-${radius(d.favorite_count)}`)
 			})
 			.attr("y", function(d) {
-				return Number(`-${radius(d.amount_of_replies + d.favorite_count)}`)
+				return Number(`-${radius(d.favorite_count)}`)
 			})
 			.attr("height", function(d) {
-				return `${radius(d.amount_of_replies + d.favorite_count) * 2}px`
+				return `${radius(d.favorite_count) * 2}px`
 			})
 			.attr("width", function(d) {
-				return `${radius(d.amount_of_replies + d.favorite_count) * 2}px`
+				return `${radius(d.favorite_count) * 2}px`
 			})
 
 		var text = node
@@ -122,14 +128,13 @@ class App {
 		text
 			.append("tspan")
 			.text(function(d) {
-				if(d.topics.length) {
-					if(d.topics[0].term) {
-						return d.topics[0].term
-					} else {
-						return `${d.topics[0][0].term}`
-					}
+				console.log(d.topics)
+				if(d.topics[0] && d.topics[0][0]) {
+					console.log('Found topics!')
+					return d.topics[0][0].term
 				} else {
-					return "";
+					console.log('Found no topics!')
+					return "no topics found";
 				}
 			})
 			.attr("x", 0)
@@ -139,21 +144,15 @@ class App {
 		text
 			.append("tspan")
 			.text(function(d) {
-				if(d.topics.length) {
-					if(d.topics[0].term) {
-						console.log('true')
-						return d.topics[1].term
-					} else {
-						console.log('false')
-						return `${d.topics[1][0].term}`
-					}
+				if(d.topics[0] && d.topics[0][1]) {
+					return d.topics[0][1].term
 				} else {
-					return "no topics found";
+					return "";
 				}
 			})
 			.attr("x", 0)
 			.attr("dy", function(d) {
-				if(d.topics.length) {
+				if(d.topics[0] && d.topics[0][0]) {
 					return 10
 				} else {
 					return 0;
@@ -186,10 +185,27 @@ class App {
 
 			div.append(name);
 			div.append(content)
+
+			if(tweet.entities.urls.length) {
+				let a = document.createElement('a')
+                var link = document.createTextNode(`${tweet.entities.urls[0].expanded_url}`);
+				a.appendChild(link);
+				a.href = tweet.entities.urls[0].expanded_url
+				div.append(a);
+			}
+
 			container.append(div);
 		}
 
-		node.on("click", d => {
+		node.on("click", (d, i, all) => {
+			let elements = document.querySelectorAll('.is-active');
+
+			for(let i = 0; i < elements.length; i++) {
+				elements[i].classList.remove('is-active');
+			}
+
+			all[i].classList.add('is-active');
+
 			let element = document.querySelector("#meta")
 			element.innerHTML = "";
 
