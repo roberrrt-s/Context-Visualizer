@@ -53,11 +53,11 @@ class App {
 				return d.id_str;
 			})
 			.distance(function(d) {
-				return getRandomInt(20, 40);
+				return getRandomInt(15, 50);
 			});
 
 		var charge_force = d3.forceManyBody()
-			.strength(-30);
+			.strength(-15);
 
 		var center_force = d3.forceCenter(width / 2, height / 2);
 
